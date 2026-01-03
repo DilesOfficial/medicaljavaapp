@@ -1,0 +1,16 @@
+./src/medicalapp/util/CSVHandler.java
+./src/medicalapp/controller/DataManager.java
+./src/medicalapp/controller/ReferralManager.java
+./src/medicalapp/model/Appointment.java
+./src/medicalapp/model/Clinician.java
+./src/medicalapp/model/Prescription.java
+./src/medicalapp/model/Referral.java
+./src/medicalapp/model/Patient.java
+./src/medicalapp/view/ReferralPanel.java
+./src/medicalapp/view/PatientPanel.java
+./src/medicalapp/view/EntityPanel.java
+./src/medicalapp/view/AppointmentPanel.java
+./src/medicalapp/view/PrescriptionPanel.java
+./src/medicalapp/view/MainFrame.java
+./src/medicalapp/view/FormDialog.java
+./src/medicalapp/MedicalApp.java
