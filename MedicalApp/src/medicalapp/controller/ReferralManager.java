@@ -32,13 +32,14 @@ public class ReferralManager {
         return instance;
     }
 
-    // CSV: id, patientId, details, urgency
+    // referral_id,patient_id,referring_clinician_id,referred_to_clinician_id,referring_facility_id,referred_to_facility_id,referral_date,urgency_level,referral_reason,clinical_summary,requested_investigations,status,appointment_id,notes,created_date,last_updated
     private List<Referral> loadReferrals() {
         List<Referral> list = new ArrayList<>();
         List<String[]> rows = CSVHandler.read(REFERRAL_FILE);
         for (String[] row : rows) {
-            if (row.length >= 4) {
-                list.add(new Referral(row[0], row[1], row[2], row[3]));
+            if (row.length >= 16) {
+                if(row[0].equalsIgnoreCase("referral_id")) continue;
+                list.add(new Referral(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15]));
             }
         }
         return list;
@@ -47,7 +48,12 @@ public class ReferralManager {
     public void saveReferrals() {
         List<String> lines = new ArrayList<>();
         for (Referral r : referrals) {
-            lines.add(String.join(",", r.getReferralId(), r.getPatientId(), r.getDetails(), r.getUrgency()));
+            lines.add(String.join(",", 
+                r.getReferralId(), r.getPatientId(), r.getReferringClinicianId(), r.getReferredToClinicianId(),
+                r.getReferringFacilityId(), r.getReferredToFacilityId(), r.getReferralDate(), r.getUrgency(),
+                r.getReason(), r.getClinicalSummary(), r.getInvestigations(), r.getStatus(),
+                r.getAppointmentId(), r.getNotes(), r.getCreatedDate(), r.getLastUpdated()
+            ));
         }
         CSVHandler.write(REFERRAL_FILE, lines);
     }
@@ -79,8 +85,14 @@ public class ReferralManager {
                              "===============\n" +
                              "Referral ID: " + r.getReferralId() + "\n" +
                              "Patient ID:  " + r.getPatientId() + "\n" +
+                             "From Clinician: " + r.getReferringClinicianId() + "\n" +
+                             "To Clinician:   " + r.getReferredToClinicianId() + "\n" +
+                             "From Facility:  " + r.getReferringFacilityId() + "\n" +
+                             "To Facility:    " + r.getReferredToFacilityId() + "\n" +
+                             "Date:        " + r.getReferralDate() + "\n" +
                              "Urgency:     " + r.getUrgency() + "\n" +
-                             "Details:\n" + r.getDetails() + "\n";
+                             "Reason:      " + r.getReason() + "\n" +
+                             "Summary:     " + r.getClinicalSummary() + "\n";
             java.nio.file.Files.write(java.nio.file.Paths.get(folder + r.getReferralId() + ".txt"), content.getBytes());
         } catch (Exception e) {
             e.printStackTrace();

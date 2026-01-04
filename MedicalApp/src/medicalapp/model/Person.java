@@ -6,28 +6,38 @@ package medicalapp.model;
  */
 public abstract class Person {
     protected String id;
-    protected String name;
-    protected String contactInfo;
+    protected String firstName;
+    protected String lastName;
+    protected String phone;
+    protected String email;
 
     public Person() {}
 
-    public Person(String id, String name, String contactInfo) {
+    public Person(String id, String firstName, String lastName, String phone, String email) {
         this.id = id;
-        this.name = name;
-        this.contactInfo = contactInfo;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getContactInfo() { return contactInfo; }
-    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     @Override
     public String toString() {
-        return name;
+        return firstName + " " + lastName;
     }
 }
